@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,104 +6,111 @@
 <title>AslbekLogo</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
 body{
-background:linear-gradient(135deg,#0d6efd,#00bfff);
-color:white;
+    font-family: Arial, sans-serif;
+    background:#f5f7fb;
+    text-align:center;
+    margin:0;
 }
 
 header{
-padding:20px 10%;
-display:flex;
-justify-content:space-between;
-align-items:center;
+    background:#2563eb;
+    color:white;
+    padding:20px;
 }
 
-.logo{
-font-size:30px;
-font-weight:bold;
+.container{
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 0 15px rgba(0,0,0,.1);
 }
 
-.hero{
-text-align:center;
-padding:120px 20px;
+input,select{
+    width:90%;
+    padding:12px;
+    margin:10px 0;
+    border:1px solid #ddd;
+    border-radius:8px;
 }
 
-.hero h1{
-font-size:60px;
-margin-bottom:20px;
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
 }
 
-.hero p{
-font-size:22px;
-margin-bottom:30px;
+button:hover{
+    background:#1d4ed8;
 }
 
-.btn{
-display:inline-block;
-padding:15px 30px;
-background:white;
-color:#0d6efd;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
-}
-
-.contact{
-background:white;
-color:black;
-padding:50px;
-text-align:center;
-}
-
-.contact h2{
-margin-bottom:20px;
-}
-
-.contact p{
-font-size:20px;
-margin:10px 0;
-}
-
-footer{
-text-align:center;
-padding:20px;
+#logoPreview{
+    margin-top:30px;
+    padding:40px;
+    border:2px dashed #ccc;
+    border-radius:12px;
+    font-size:40px;
+    font-weight:bold;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="logo">AslbekLogo</div>
+    <h1>AslbekLogo</h1>
+    <p>Create Professional Logos Instantly</p>
 </header>
 
-<section class="hero">
-<h1>Professional Logo Design</h1>
-<p>Create modern and unique logos for your business.</p>
+<div class="container">
 
-<a class="btn" href="https://t.me/xudoyor_011" target="_blank">
-Contact on Telegram
-</a>
-</section>
+<h2>Create Your Logo</h2>
 
-<section class="contact">
-<h2>Contact Information</h2>
+<input type="text" id="logoName" placeholder="Enter Logo Name">
 
-<p>📞 +998 93 338 87 23</p>
-<p>📲 Telegram: @xudoyor_011</p>
+<br>
 
-</section>
+<input type="color" id="logoColor" value="#2563eb">
 
-<footer>
-© 2026 AslbekLogo. All Rights Reserved.
-</footer>
+<br>
+
+<select id="logoStyle">
+    <option>Modern</option>
+    <option>Minimal</option>
+    <option>Gaming</option>
+    <option>Business</option>
+</select>
+
+<br>
+
+<button onclick="generateLogo()">Generate Logo</button>
+
+<div id="logoPreview">
+    Your Logo
+</div>
+
+</div>
+
+<script>
+function generateLogo(){
+    let name = document.getElementById("logoName").value;
+    let color = document.getElementById("logoColor").value;
+
+    if(name==""){
+        name="AslbekLogo";
+    }
+
+    let preview = document.getElementById("logoPreview");
+
+    preview.innerHTML=name;
+    preview.style.color=color;
+}
+</script>
 
 </body>
 </html>
