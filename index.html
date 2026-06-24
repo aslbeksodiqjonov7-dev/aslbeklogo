@@ -111,7 +111,30 @@ function generateLogo(){
     preview.style.color=color;
 }
 </script>
+<script>
+function generateLogo(){
+    let name = document.getElementById("logoName").value;
+    let color = document.getElementById("logoColor").value;
 
+    if(name==""){
+        name="AslbekLogo";
+    }
+
+    let preview = document.getElementById("logoPreview");
+
+    preview.innerHTML=name;
+    preview.style.color=color;
+}
+
+function downloadLogo(){
+    html2canvas(document.getElementById("logoPreview")).then(canvas => {
+        const link = document.createElement("a");
+        link.download = "logo.png";
+        link.href = canvas.toDataURL();
+        link.click();
+    });
+}
+</script>
 </body>
 </html>
 <button onclick="downloadLogo()">Download PNG</button>
