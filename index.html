@@ -125,6 +125,11 @@ function generateLogo(){
 
     preview.innerHTML=name;
     preview.style.color=color;
+    let prompt = "professional logo for " + name;
+
+let img = document.getElementById("aiLogo");
+img.src = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
+img.style.display = "block";
 }
 
 function downloadLogo(){
@@ -133,12 +138,7 @@ function downloadLogo(){
         link.download = "logo.png";
         link.href = canvas.toDataURL();
         link.click();
-        let prompt = "professional logo for " + name;
-
-let img = document.getElementById("aiLogo");
-img.src = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
-img.style.display = "block";
-    });
+           });
 }
 </script>
 
