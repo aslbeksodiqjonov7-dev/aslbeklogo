@@ -95,7 +95,8 @@ button:hover{
 </div>
 
 </div>
-
+    
+<img id="aiLogo" style="max-width:100%;margin-top:20px;display:none;">
 <script>
 function generateLogo(){
     let name = document.getElementById("logoName").value;
@@ -132,9 +133,16 @@ function downloadLogo(){
         link.download = "logo.png";
         link.href = canvas.toDataURL();
         link.click();
+        let prompt = "professional logo for " + name;
+
+let img = document.getElementById("aiLogo");
+img.src = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
+img.style.display = "block";
     });
 }
 </script>
+
 <button onclick="downloadLogo()">Download PNG</button>
+    
 </body>
 </html>
