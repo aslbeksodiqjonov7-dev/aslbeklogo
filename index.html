@@ -1,134 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AslbekLogo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AslbekLogo AI</title>
 
-<style>
-body{
-    font-family: Arial, sans-serif;
-    background:#f5f7fb;
-    text-align:center;
-    margin:0;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-header{
-    background:#2563eb;
-    color:white;
-    padding:20px;
-}
+    <link rel="stylesheet" href="style.css">
 
-.container{
-    max-width:700px;
-    margin:40px auto;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 0 15px rgba(0,0,0,.1);
-}
-
-input,select{
-    width:90%;
-    padding:12px;
-    margin:10px 0;
-    border:1px solid #ddd;
-    border-radius:8px;
-}
-
-button{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 25px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-}
-
-button:hover{
-    background:#1d4ed8;
-}
-
-#logoPreview{
-    margin-top:30px;
-    padding:40px;
-    border:2px dashed #ccc;
-    border-radius:12px;
-    font-size:40px;
-    font-weight:bold;
-}
-</style>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
-<body>
 
-<header>
-    <h1>AslbekLogo</h1>
-    <p>Create Professional Logos Instantly</p>
-</header>
+<body>
 
 <div class="container">
 
-<h2>Create Your Logo</h2>
+    <div class="left-panel">
 
-<input type="text" id="logoName" placeholder="Enter Logo Name">
+        <h1>AslbekLogo AI</h1>
+        <p>Create professional AI logos in seconds.</p>
 
-<br>
+        <label>Logo Name</label>
+        <input type="text" id="logoName" placeholder="Nike">
 
-<input type="color" id="logoColor" value="#2563eb">
+        <label>Logo Topic</label>
+        <input type="text" id="logoTopic" placeholder="Football, Shop, Restaurant">
 
-<br>
+        <label>Logo Style</label>
 
-<select id="logoStyle">
-    <option>Modern</option>
-    <option>Minimal</option>
-    <option>Gaming</option>
-    <option>Business</option>
-</select>
+        <select id="logoStyle">
 
-<br>
+            <option>Modern</option>
+            <option>Minimal</option>
+            <option>Luxury</option>
+            <option>Gaming</option>
+            <option>Technology</option>
+            <option>Mascot</option>
 
-<button onclick="generateLogo()">Generate Logo</button>
+        </select>
+                <label>Logo Color</label>
+        <input type="color" id="logoColor" value="#4F46E5">
 
-<div id="logoPreview">
-    Your Logo
+        <button onclick="generateLogo()" class="generate-btn">
+            🚀 Generate AI Logo
+        </button>
+
+        <button onclick="downloadLogo()" class="download-btn">
+            📥 Download PNG
+        </button>
+
+    </div>
+
+    <div class="right-panel">
+
+        <div id="logoPreview">
+
+            <img id="aiLogo" src="" alt="AI Logo">
+
+            <h2 id="logoText">
+                Your Logo
+            </h2>
+
+        </div>
+
+    </div>
+
 </div>
 
-</div>
-    
-<img id="aiLogo" style="max-width:100%;margin-top:20px;display:none;">
+<script src="script.js"></script>
 
-<script>
-function generateLogo(){
-    let name = document.getElementById("logoName").value;
-    let color = document.getElementById("logoColor").value;
-
-    if(name==""){
-        name="AslbekLogo";
-    }
-
-    let preview = document.getElementById("logoPreview");
-
-    preview.innerHTML=name;
-    preview.style.color=color;
-    let prompt = "professional logo for " + name;
-
-let img = document.getElementById("aiLogo");
-img.src = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
-img.style.display = "block";
-}
-
-function downloadLogo(){
-    html2canvas(document.getElementById("logoPreview")).then(canvas => {
-        const link = document.createElement("a");
-        link.download = "logo.png";
-        link.href = canvas.toDataURL();
-        link.click();
-           });
-}
-</script>
-
-<button onclick="downloadLogo()">Download PNG</button>
-    
 </body>
 </html>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#0b0b16;
+    color:#fff;
+    min-height:100vh;
+}
+
+.container{
+    display:flex;
+    min-height:100vh;
+}
+
+.left-panel{
+    width:380px;
+    padding:40px;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(15px);
+    border-right:1px solid rgba(255,255,255,.1);
+}
+
+.left-panel h1{
+    font-size:32px;
+    margin-bottom:10px;
+    color:#6c63ff;
+}
+
+.left-panel p{
+    color:#bcbcbc;
+    margin-bottom:30px;
+}
+
+label{
+    display:block;
+    margin-top:20px;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+input,
+select{
+    width:100%;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:#17172a;
+    color:white;
+    font-size:15px;
+}
+.generate-btn,
+.download-btn{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.generate-btn{
+    background:#5b5cff;
+    color:#fff;
+}
+
+.generate-btn:hover{
+    background:#7677ff;
+    transform:translateY(-2px);
+}
+
+.download-btn{
+    background:#1f1f35;
+    color:#fff;
+}
+
+.download-btn:hover{
+    background:#2d2d49;
+    transform:translateY(-2px);
+}
+
+.right-panel{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+#logoPreview{
+    width:650px;
+    min-height:500px;
+    background:#141425;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.08);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    box-shadow:0 0 40px rgba(91,92,255,.25);
+    padding:30px;
+}
+
+#aiLogo{
+    max-width:350px;
+    max-height:350px;
+    display:none;
+    margin-bottom:25px;
+    border-radius:18px;
+}
+
+#logoText{
+    font-size:42px;
+    font-weight:700;
+    text-align:center;
+}
+function generateLogo(){
+
+    let name = document.getElementById("logoName").value.trim();
+    let topic = document.getElementById("logoTopic").value.trim();
+    let style = document.getElementById("logoStyle").value;
+    let color = document.getElementById("logoColor").value;
+
+    if(name==="") name="AslbekLogo";
+    if(topic==="") topic="Business";
+
+    document.getElementById("logoText").innerHTML = name;
+    document.getElementById("logoText").style.color = color;
+
+    const prompt = `
+Professional ${style} vector logo.
+Topic: ${topic}.
+Brand name: ${name}.
+Simple icon.
+Premium.
+Transparent background.
+Centered.
+High quality.
+`;
+
+    const img = document.getElementById("aiLogo");
+
+    img.src =
+    "https://image.pollinations.ai/prompt/" +
+    encodeURIComponent(prompt) +
+    "?width=1024&height=1024&nologo=true";
+
+    img.style.display="block";
+}
+img.onload = function(){
+    document.getElementById("logoText").style.display = "none";
+};
+
+img.onerror = function(){
+    alert("AI logo yaratishda xatolik yuz berdi. Qayta urinib ko'ring.");
+};
+
+function downloadLogo(){
+
+    html2canvas(document.getElementById("logoPreview"),{
+        backgroundColor:null,
+        scale:2
+    }).then(canvas=>{
+
+        const link=document.createElement("a");
+
+        link.download="AslbekLogo.png";
+
+        link.href=canvas.toDataURL("image/png");
+
+        link.click();
+
+    });
+
+}
