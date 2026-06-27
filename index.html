@@ -1,1 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AslbekLogo AI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#050816,#0f172a,#1e1b4b);
+min-height:100vh;
+overflow-x:hidden;
+color:white;
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+
+width:390px;
+
+background:rgba(15,23,42,.95);
+
+backdrop-filter:blur(25px);
+
+padding:35px;
+
+border-right:1px solid rgba(255,255,255,.08);
+
+}
+
+.logoTitle{
+
+font-size:34px;
+
+font-weight:800;
+
+margin-bottom:8px;
+
+}
+
+.logoTitle span{
+
+color:#6D5CFF;
+
+}
+
+.logoSub{
+
+color:#94a3b8;
+
+line-height:1.7;
+
+margin-bottom:30px;
+
+}
+
+label{
+
+display:block;
+
+margin-top:18px;
+
+margin-bottom:8px;
+
+font-weight:600;
+
+}
+
+input,
+select{
+
+width:100%;
+
+padding:14px;
+
+background:#1e293b;
+
+border:none;
+
+border-radius:14px;
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+input:focus,
+select:focus{
+
+box-shadow:0 0 0 2px #6D5CFF;
+
+}
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:14px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-top:18px;
+transition:.3s;
+}
+
+.generateBtn{
+background:#6D5CFF;
+color:#fff;
+}
+
+.generateBtn:hover{
+background:#7d6dff;
+transform:translateY(-2px);
+}
+
+.downloadBtn{
+background:#1f2937;
+color:#fff;
+}
+
+.downloadBtn:hover{
+background:#374151;
+transform:translateY(-2px);
+}
+
+.main{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+.previewBox{
+width:820px;
+min-height:620px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:30px;
+padding:35px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+#aiLogo{
+display:none;
+width:380px;
+max-width:100%;
+border-radius:20px;
+box-shadow:0 20px 60px rgba(0,0,0,.4);
+margin-bottom:25px;
+}
+
+#logoText{
+font-size:42px;
+font-weight:700;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h1 class="logoTitle">
+Aslbek<span>Logo</span> AI
+</h1>
+
+<p class="logoSub">
+Create amazing AI logos in seconds.
+</p>
+
+<label>Logo Name</label>
+<input id="logoName" placeholder="Nike">
+
+<label>Logo Topic</label>
+<input id="logoTopic" placeholder="Football, Shop, Restaurant">
+
+<label>Industry</label>
+
+<select id="logoIndustry">
+
+<option>Sports</option>
+<option>Business</option>
+<option>Technology</option>
+<option>Restaurant</option>
+<option>Fashion</option>
+<option>Education</option>
+
+</select>
+<label>Logo Style</label>
+
+<select id="logoStyle">
+<option>Modern</option>
+<option>Minimal</option>
+<option>Luxury</option>
+<option>Gaming</option>
+<option>Mascot</option>
+<option>3D</option>
+</select>
+
+<label>Main Icon</label>
+
+<input
+id="logoIcon"
+placeholder="Football, Lion, Crown, Camera...">
+
+<label>Primary Color</label>
+
+<input
+type="color"
+id="logoColor"
+value="#6D5CFF">
+
+<button class="generateBtn" onclick="generateLogo()">
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+ Generate AI Logo
+</button>
+
+<button class="downloadBtn" onclick="downloadLogo()">
+<i class="fa-solid fa-download"></i>
+ Download PNG
+</button>
+
+</div>
+
+<div class="main">
+
+<div class="previewBox">
+
+<img id="aiLogo" src="" alt="AI Logo">
+
+<h2 id="logoText">
+Your Logo
+</h2>
+
+<div class="cards">
+
+<div class="card"><i class="fa-solid fa-futbol"></i></div>
+<div class="card"><i class="fa-solid fa-crown"></i></div>
+<div class="card"><i class="fa-solid fa-bolt"></i></div>
+<div class="card"><i class="fa-solid fa-store"></i></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<style>
+
+.cards{
+width:100%;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+margin-top:35px;
+}
+
+.card{
+height:130px;
+background:#1f2937;
+border-radius:18px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:42px;
+color:#6D5CFF;
+cursor:pointer;
+transition:.3s;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.card:hover{
+transform:translateY(-6px);
+background:#2d3b50;
+}
+
+</style>
+<script>
+
+function generateLogo(){
+
+const name=document.getElementById("logoName").value || "AslbekLogo";
+const topic=document.getElementById("logoTopic").value || "Business";
+const industry=document.getElementById("logoIndustry").value;
+const style=document.getElementById("logoStyle").value;
+const icon=document.getElementById("logoIcon").value || topic;
+const color=document.getElementById("logoColor").value;
+
+const logoText=document.getElementById("logoText");
+const img=document.getElementById("aiLogo");
+
+logoText.innerHTML="Generating...";
+logoText.style.color=color;
+
+const prompt=`
+Professional ${style} vector logo.
+Brand: ${name}
+Topic: ${topic}
+Industry: ${industry}
+Main icon: ${icon}
+Modern minimal logo.
+Premium quality.
+Transparent background.
+Centered.
+`;
+
+img.style.display="block";
+img.style.opacity="0.3";
+
+img.onload=function(){
+
+logoText.innerHTML=name;
+
+img.style.opacity="1";
+
+};
+
+img.src="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt);
+
+}
+
+function downloadLogo(){
+
+html2canvas(document.querySelector(".previewBox"),{
+
+backgroundColor:null,
+
+scale:2
+
+}).then(canvas=>{
+
+const link=document.createElement("a");
+
+link.download="AslbekLogo.png";
+
+link.href=canvas.toDataURL("image/png");
+
+link.click();
+
+});
+
+}
+
+const cards=document.querySelectorAll(".card");
+
+cards.forEach(card=>{
+
+card.onclick=function(){
+
+document.getElementById("logoIcon").value=this.innerText;
+
+generateLogo();
+
+};
+
+});
+
+</script>
+
+</body>
+</html>
