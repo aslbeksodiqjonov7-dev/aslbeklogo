@@ -1,257 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AslbekLogo AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>AslbekLogo AI</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#0b1120;
+color:#fff;
+overflow-x:hidden;
+}
+
+.container{
+display:flex;
+min-height:100vh;
+}
+
+.sidebar{
+width:380px;
+background:#111827;
+padding:35px;
+border-right:1px solid rgba(255,255,255,.08);
+}
+
+.logoTitle{
+font-size:30px;
+font-weight:700;
+margin-bottom:8px;
+}
+
+.logoText{
+color:#94a3b8;
+margin-bottom:30px;
+}
+
+label{
+display:block;
+margin-top:18px;
+margin-bottom:8px;
+font-weight:600;
+}
+
+input,
+select{
+width:100%;
+padding:14px;
+background:#1e293b;
+border:none;
+border-radius:12px;
+color:white;
+font-size:15px;
+outline:none;
+}
+.generateBtn,
+.downloadBtn{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:12px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+.generateBtn{
+background:#4f46e5;
+color:#fff;
+}
+
+.generateBtn:hover{
+background:#6366f1;
+}
+
+.downloadBtn{
+background:#1f2937;
+color:#fff;
+}
+
+.downloadBtn:hover{
+background:#374151;
+}
+
+.main{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+#logoPreview{
+width:700px;
+height:520px;
+background:#111827;
+border-radius:25px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+box-shadow:0 0 40px rgba(79,70,229,.3);
+padding:30px;
+}
+
+#aiLogo{
+display:none;
+max-width:320px;
+max-height:320px;
+margin-bottom:25px;
+border-radius:16px;
+}
+
+#logoText{
+font-size:42px;
+font-weight:700;
+text-align:center;
+}
+
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="left-panel">
+<div class="sidebar">
 
-        <h1>AslbekLogo AI</h1>
-        <p>Create professional AI logos in seconds.</p>
+<h1 class="logoTitle">AslbekLogo AI</h1>
 
-        <label>Logo Name</label>
-        <input type="text" id="logoName" placeholder="Nike">
+<p class="logoText">
+Create professional AI logos in seconds.
+</p>
 
-        <label>Logo Topic</label>
-        <input type="text" id="logoTopic" placeholder="Football, Shop, Restaurant">
+<label>Logo Name</label>
+<input type="text" id="logoName" placeholder="Nike">
 
-        <label>Logo Style</label>
+<label>Logo Topic</label>
+<input type="text" id="logoTopic" placeholder="Football, Shop, Restaurant">
 
-        <select id="logoStyle">
+<label>Logo Style</label>
 
-            <option>Modern</option>
-            <option>Minimal</option>
-            <option>Luxury</option>
-            <option>Gaming</option>
-            <option>Technology</option>
-            <option>Mascot</option>
+<select id="logoStyle">
+<option>Modern</option>
+<option>Minimal</option>
+<option>Gaming</option>
+<option>Luxury</option>
+<option>Technology</option>
+<option>Mascot</option>
+</select>
+<label>Logo Color</label>
+<input type="color" id="logoColor" value="#4F46E5">
 
-        </select>
-                <label>Logo Color</label>
-        <input type="color" id="logoColor" value="#4F46E5">
+<label>Logo Icon</label>
+<input type="text" id="logoIcon" placeholder="Football, Lion, Crown, Camera...">
 
-        <button onclick="generateLogo()" class="generate-btn">
-            🚀 Generate AI Logo
-        </button>
+<button class="generateBtn" onclick="generateLogo()">
+🚀 Generate AI Logo
+</button>
 
-        <button onclick="downloadLogo()" class="download-btn">
-            📥 Download PNG
-        </button>
-
-    </div>
-
-    <div class="right-panel">
-
-        <div id="logoPreview">
-
-            <img id="aiLogo" src="" alt="AI Logo">
-
-            <h2 id="logoText">
-                Your Logo
-            </h2>
-
-        </div>
-
-    </div>
+<button class="downloadBtn" onclick="downloadLogo()">
+📥 Download PNG
+</button>
 
 </div>
 
-<script src="script.js"></script>
+<div class="main">
 
-</body>
-</html>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
+<div id="logoPreview">
 
-body{
-    background:#0b0b16;
-    color:#fff;
-    min-height:100vh;
-}
+<img id="aiLogo" src="" alt="AI Logo">
 
-.container{
-    display:flex;
-    min-height:100vh;
-}
+<h2 id="logoText">Your Logo</h2>
 
-.left-panel{
-    width:380px;
-    padding:40px;
-    background:rgba(255,255,255,.05);
-    backdrop-filter:blur(15px);
-    border-right:1px solid rgba(255,255,255,.1);
-}
+</div>
 
-.left-panel h1{
-    font-size:32px;
-    margin-bottom:10px;
-    color:#6c63ff;
-}
+</div>
 
-.left-panel p{
-    color:#bcbcbc;
-    margin-bottom:30px;
-}
+</div>
 
-label{
-    display:block;
-    margin-top:20px;
-    margin-bottom:8px;
-    font-weight:600;
-}
+<script>
 
-input,
-select{
-    width:100%;
-    padding:14px;
-    border:none;
-    outline:none;
-    border-radius:12px;
-    background:#17172a;
-    color:white;
-    font-size:15px;
-}
-.generate-btn,
-.download-btn{
-    width:100%;
-    padding:15px;
-    margin-top:20px;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    font-size:16px;
-    font-weight:600;
-    transition:.3s;
-}
-
-.generate-btn{
-    background:#5b5cff;
-    color:#fff;
-}
-
-.generate-btn:hover{
-    background:#7677ff;
-    transform:translateY(-2px);
-}
-
-.download-btn{
-    background:#1f1f35;
-    color:#fff;
-}
-
-.download-btn:hover{
-    background:#2d2d49;
-    transform:translateY(-2px);
-}
-
-.right-panel{
-    flex:1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
-}
-
-#logoPreview{
-    width:650px;
-    min-height:500px;
-    background:#141425;
-    border-radius:24px;
-    border:1px solid rgba(255,255,255,.08);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    box-shadow:0 0 40px rgba(91,92,255,.25);
-    padding:30px;
-}
-
-#aiLogo{
-    max-width:350px;
-    max-height:350px;
-    display:none;
-    margin-bottom:25px;
-    border-radius:18px;
-}
-
-#logoText{
-    font-size:42px;
-    font-weight:700;
-    text-align:center;
-}
 function generateLogo(){
 
-    let name = document.getElementById("logoName").value.trim();
-    let topic = document.getElementById("logoTopic").value.trim();
-    let style = document.getElementById("logoStyle").value;
-    let color = document.getElementById("logoColor").value;
+let name=document.getElementById("logoName").value.trim();
+let topic=document.getElementById("logoTopic").value.trim();
+let style=document.getElementById("logoStyle").value;
+let color=document.getElementById("logoColor").value;
+let icon=document.getElementById("logoIcon").value.trim();
 
-    if(name==="") name="AslbekLogo";
-    if(topic==="") topic="Business";
+if(name==="") name="AslbekLogo";
+if(topic==="") topic="Business";
+if(icon==="") icon=topic;
 
-    document.getElementById("logoText").innerHTML = name;
-    document.getElementById("logoText").style.color = color;
+document.getElementById("logoText").innerHTML=name;
+document.getElementById("logoText").style.color=color;
 
-    const prompt = `
-Professional ${style} vector logo.
-Topic: ${topic}.
-Brand name: ${name}.
-Simple icon.
-Premium.
-Transparent background.
-Centered.
-High quality.
-`;
+let prompt=
+`Professional ${style} vector logo,
+brand name ${name},
+topic ${topic},
+main icon ${icon},
+clean minimalist icon,
+transparent background,
+premium quality,
+flat vector,
+centered logo`;
 
-    const img = document.getElementById("aiLogo");
+let img=document.getElementById("aiLogo");
 
-    img.src =
-    "https://image.pollinations.ai/prompt/" +
-    encodeURIComponent(prompt) +
-    "?width=1024&height=1024&nologo=true";
+img.src="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt);
 
-    img.style.display="block";
+img.style.display="block";
+
 }
-img.onload = function(){
-    document.getElementById("logoText").style.display = "none";
-};
-
-img.onerror = function(){
-    alert("AI logo yaratishda xatolik yuz berdi. Qayta urinib ko'ring.");
-};
 
 function downloadLogo(){
 
-    html2canvas(document.getElementById("logoPreview"),{
-        backgroundColor:null,
-        scale:2
-    }).then(canvas=>{
+html2canvas(document.getElementById("logoPreview")).then(canvas=>{
 
-        const link=document.createElement("a");
+const link=document.createElement("a");
 
-        link.download="AslbekLogo.png";
+link.download="AslbekLogo.png";
 
-        link.href=canvas.toDataURL("image/png");
+link.href=canvas.toDataURL("image/png");
 
-        link.click();
+link.click();
 
-    });
+});
 
 }
+
+</script>
+
+</body>
+</html>
+
