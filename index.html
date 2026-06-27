@@ -173,12 +173,29 @@ align-items:center;
 }
 
 #aiLogo{
+}
+#logoGrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+width:100%;
+margin-bottom:30px;
+}
+
+.aiLogo{
+width:100%;
+height:250px;
+object-fit:cover;
 display:none;
-width:380px;
-max-width:100%;
 border-radius:20px;
-box-shadow:0 20px 60px rgba(0,0,0,.4);
-margin-bottom:25px;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+.aiLogo:hover{
+transform:scale(1.03);
+}
 }
 
 #logoText{
@@ -263,8 +280,17 @@ value="#6D5CFF">
 
 <div class="previewBox">
 
-<img id="aiLogo" src="" alt="AI Logo">
+<div id="logoGrid">
 
+<img id="logo1" class="aiLogo">
+
+<img id="logo2" class="aiLogo">
+
+<img id="logo3" class="aiLogo">
+
+<img id="logo4" class="aiLogo">
+
+</div>
 <h2 id="logoText">
 Your Logo
 </h2>
