@@ -11,6 +11,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 <style>
@@ -23,9 +25,10 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:#0b1120;
+background:linear-gradient(135deg,#050816,#111827,#1e1b4b);
 color:#fff;
 overflow-x:hidden;
+min-height:100vh;
 }
 
 .container{
@@ -34,21 +37,27 @@ min-height:100vh;
 }
 
 .sidebar{
-width:380px;
-background:#111827;
+width:390px;
 padding:35px;
+background:rgba(17,24,39,.92);
+backdrop-filter:blur(25px);
 border-right:1px solid rgba(255,255,255,.08);
 }
 
 .logoTitle{
-font-size:30px;
+font-size:32px;
 font-weight:700;
 margin-bottom:8px;
 }
 
-.logoText{
+.logoTitle span{
+color:#6d5cff;
+}
+
+.logoSub{
 color:#94a3b8;
 margin-bottom:30px;
+line-height:1.6;
 }
 
 label{
@@ -62,45 +71,52 @@ input,
 select{
 width:100%;
 padding:14px;
-background:#1e293b;
 border:none;
-border-radius:12px;
+border-radius:14px;
+background:#1e293b;
 color:white;
 font-size:15px;
 outline:none;
+transition:.3s;
 }
-.generateBtn,
-.downloadBtn{
+
+input:focus,
+select:focus{
+box-shadow:0 0 0 2px #6d5cff;
+}
+
+button{
 width:100%;
 padding:15px;
-margin-top:20px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 font-size:16px;
 font-weight:600;
 cursor:pointer;
+margin-top:18px;
 transition:.3s;
 }
 
 .generateBtn{
-background:#4f46e5;
-color:#fff;
+background:#6d5cff;
+color:white;
 }
 
 .generateBtn:hover{
-background:#6366f1;
+transform:translateY(-2px);
+background:#7f70ff;
 }
 
 .downloadBtn{
 background:#1f2937;
-color:#fff;
+color:white;
 }
 
 .downloadBtn:hover{
 background:#374151;
 }
 
-.main{
+  .main{
 flex:1;
 display:flex;
 justify-content:center;
@@ -108,31 +124,60 @@ align-items:center;
 padding:40px;
 }
 
-#logoPreview{
-width:700px;
-height:520px;
-background:#111827;
-border-radius:25px;
+.previewBox{
+width:820px;
+min-height:620px;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+border-radius:30px;
+backdrop-filter:blur(20px);
 display:flex;
 flex-direction:column;
-justify-content:center;
 align-items:center;
-box-shadow:0 0 40px rgba(79,70,229,.3);
-padding:30px;
+justify-content:center;
+padding:40px;
 }
 
 #aiLogo{
 display:none;
-max-width:320px;
-max-height:320px;
+max-width:420px;
+max-height:420px;
+border-radius:22px;
 margin-bottom:25px;
-border-radius:16px;
+box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
 #logoText{
-font-size:42px;
+font-size:46px;
 font-weight:700;
 text-align:center;
+}
+
+.cards{
+margin-top:35px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+width:100%;
+}
+
+.card{
+height:140px;
+border-radius:18px;
+background:#1f2937;
+border:1px solid rgba(255,255,255,.08);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:40px;
+color:#6d5cff;
+transition:.3s;
+cursor:pointer;
+}
+
+.card:hover{
+transform:translateY(-5px);
+background:#283548;
 }
 
 </style>
@@ -144,112 +189,241 @@ text-align:center;
 
 <div class="sidebar">
 
-<h1 class="logoTitle">AslbekLogo AI</h1>
+<h1 class="logoTitle">
+Aslbek<span>Logo</span> AI
+</h1>
 
-<p class="logoText">
-Create professional AI logos in seconds.
+<p class="logoSub">
+Create premium AI logos in seconds.
 </p>
 
 <label>Logo Name</label>
-<input type="text" id="logoName" placeholder="Nike">
+<input id="logoName" placeholder="Nike">
 
 <label>Logo Topic</label>
-<input type="text" id="logoTopic" placeholder="Football, Shop, Restaurant">
+<input id="logoTopic" placeholder="Football, Shop, Restaurant">
 
-<label>Logo Style</label>
+<label>Industry</label>
+
+<select id="logoIndustry">
+<option>Sports</option>
+<option>Business</option>
+<option>Technology</option>
+<option>Restaurant</option>
+<option>Fashion</option>
+<option>Education</option>
+</select>
+
+  <label>Logo Style</label>
 
 <select id="logoStyle">
 <option>Modern</option>
 <option>Minimal</option>
 <option>Gaming</option>
 <option>Luxury</option>
-<option>Technology</option>
 <option>Mascot</option>
+<option>3D</option>
 </select>
-<label>Logo Color</label>
-<input type="color" id="logoColor" value="#4F46E5">
 
-<label>Logo Icon</label>
-<input type="text" id="logoIcon" placeholder="Football, Lion, Crown, Camera...">
+<label>Main Icon</label>
+<input id="logoIcon" placeholder="Football, Lion, Crown, Car...">
+
+<label>Primary Color</label>
+<input type="color" id="logoColor" value="#6d5cff">
 
 <button class="generateBtn" onclick="generateLogo()">
-🚀 Generate AI Logo
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+Generate AI Logo
 </button>
 
 <button class="downloadBtn" onclick="downloadLogo()">
-📥 Download PNG
+<i class="fa-solid fa-download"></i>
+Download PNG
 </button>
 
 </div>
 
 <div class="main">
 
-<div id="logoPreview">
+<div class="previewBox">
 
-<img id="aiLogo" src="" alt="AI Logo">
+<img id="aiLogo">
 
-<h2 id="logoText">Your Logo</h2>
+<h2 id="logoText">
+Your Logo
+</h2>
 
+<div class="cards">
+
+<div class="card">
+<i class="fa-solid fa-futbol"></i>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-crown"></i>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-bolt"></i>
+</div>
+
+<div class="card">
+<i class="fa-solid fa-store"></i>
 </div>
 
 </div>
 
 </div>
 
-<script>
+</div>
+
+</div>
+
+  <script>
 
 function generateLogo(){
 
 let name=document.getElementById("logoName").value.trim();
 let topic=document.getElementById("logoTopic").value.trim();
+let industry=document.getElementById("logoIndustry").value;
 let style=document.getElementById("logoStyle").value;
-let color=document.getElementById("logoColor").value;
 let icon=document.getElementById("logoIcon").value.trim();
+let color=document.getElementById("logoColor").value;
 
 if(name==="") name="AslbekLogo";
 if(topic==="") topic="Business";
 if(icon==="") icon=topic;
 
-document.getElementById("logoText").innerHTML=name;
-document.getElementById("logoText").style.color=color;
+const text=document.getElementById("logoText");
 
-let prompt=
-`Professional ${style} vector logo,
-brand name ${name},
-topic ${topic},
-main icon ${icon},
-clean minimalist icon,
-transparent background,
-premium quality,
-flat vector,
-centered logo`;
+text.innerHTML="Generating...";
 
-let img=document.getElementById("aiLogo");
+text.style.color=color;
 
-img.src="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt);
+const prompt=`
+Professional ${style} vector logo.
+Brand ${name}.
+Topic ${topic}.
+Industry ${industry}.
+Main icon ${icon}.
+Minimal.
+Premium.
+Transparent background.
+Centered.
+`;
+
+const img=document.getElementById("aiLogo");
+
+img.onload=function(){
+
+text.innerHTML=name;
 
 img.style.display="block";
+
+};
+
+img.src="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt);
 
 }
 
 function downloadLogo(){
 
-html2canvas(document.getElementById("logoPreview")).then(canvas=>{
+html2canvas(document.querySelector(".previewBox"),{
+backgroundColor:null,
+scale:2
+}).then(canvas=>{
 
-const link=document.createElement("a");
+const a=document.createElement("a");
 
-link.download="AslbekLogo.png";
+a.download="AslbekLogo.png";
 
-link.href=canvas.toDataURL("image/png");
+a.href=canvas.toDataURL("image/png");
 
-link.click();
+a.click();
 
 });
 
 }
 
+const cards = document.querySelectorAll(".card");
+
+cards.forEach((card,index)=>{
+
+card.onclick=function(){
+
+let icons=[
+"football",
+"lion",
+"crown",
+"store"
+];
+
+let icon=icons[index];
+
+let name=document.getElementById("logoName").value||"AslbekLogo";
+let topic=document.getElementById("logoTopic").value||"Business";
+let style=document.getElementById("logoStyle").value;
+let industry=document.getElementById("logoIndustry").value;
+let color=document.getElementById("logoColor").value;
+
+document.getElementById("logoText").style.color=color;
+
+let prompt=`
+Professional ${style} vector logo.
+Brand ${name}.
+Industry ${industry}.
+Topic ${topic}.
+Main icon ${icon}.
+Premium.
+Flat vector.
+Transparent background.
+`;
+
+let img=document.getElementById("aiLogo");
+
+img.style.opacity="0.3";
+
+img.onload=function(){
+
+img.style.opacity="1";
+
+};
+
+img.src="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt);
+
+};
+
+});
+
+let btn=document.querySelector(".generateBtn");
+
+btn.disabled=true;
+
+btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
+
+img.onload=function(){
+
+img.style.opacity="1";
+img.style.transform="scale(1)";
+img.style.transition=".4s";
+
+document.getElementById("logoText").innerHTML=name;
+
+btn.disabled=false;
+
+btn.innerHTML='<i class="fa-solid fa-wand-magic-sparkles"></i> Generate AI Logo';
+
+};
+
+img.style.transform="scale(.9)";
+
+img.src="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt)+"?width=1024&height=1024&nologo=true";
+
+}
+
+document.getElementById("aiLogo").style.transition=".4s";
+
 </script>
 
 </body>
-</html>
-
+</html>    
